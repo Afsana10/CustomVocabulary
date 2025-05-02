@@ -1,0 +1,96 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple UI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f7f7f7;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .button {
+      padding: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px;
+      }
+
+      .form-group input {
+        font-size: 14px;
+      }
+
+      .button {
+        font-size: 14px;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="englishWordTextbox">Word:</label>
+      <input type="text" id="englishWordTextbox" name="englishWordTextbox" placeholder="Enter English word">
+    </div>
+
+    <div class="form-group">
+      <label for="bengaliMeaningTextbox">Meaning:</label>
+      <input type="text" id="bengaliMeaningTextbox" name="bengaliMeaningTextbox" placeholder="Enter Bengali meaning">
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="search">Search:</label>
+      <input type="search" id="search" name="search" placeholder="Search something...">
+    </div> -->
+
+    <button class="button" type="submit" id="addWordButton">Add</button>
+  </form>
+</div>
+
+</body>
+</html>
