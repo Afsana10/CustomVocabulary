@@ -71,11 +71,12 @@
 <body>
 
 <div class="container">
-  <form method="POST">
+  <form method="POST" onsubmit="setTimeout(() => this.reset(), 10);">
     {% csrf_token %}
     <div class="form-group">
       <label for="englishWordTextbox">Word:</label>
       <input type="text" id="englishWordTextbox" name="englishWordTextbox" placeholder="Enter English word">
+      <!--css knows 'id', django knows 'name'-->
     </div>
 
     <div class="form-group">
@@ -91,6 +92,14 @@
     <button class="button" type="submit" id="addWordButton">Add</button>
   </form>
 </div>
+
+<div class="container">
+  <h2>Word List</h2>
+  <ul>
+    {% for word in vocab_list %}
+      <li>{{ word.word }} - {{ word.meaning }}</li>
+    {% endfor %}
+  </ul>
 
 </body>
 </html>
