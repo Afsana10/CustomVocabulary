@@ -20,5 +20,6 @@ from CustomVocabularyApp import views
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', views.first),
+    path('ajax/search/', views.ajax_search, name='ajax_search'),
 
 ]

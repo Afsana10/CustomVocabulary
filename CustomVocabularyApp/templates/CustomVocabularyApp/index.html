@@ -71,6 +71,15 @@
 <body>
 
 <div class="container">
+  <div class="form-group">
+    <label for="search">Search:</label>
+    <input type="search" id="search" name="search" placeholder="Start typing...">
+  </div>
+  <ul id="searchResults"></ul>
+</div>
+
+
+<div class="container">
   <form method="POST" onsubmit="setTimeout(() => this.reset(), 10);">
     {% csrf_token %}
     <div class="form-group">
@@ -100,6 +109,38 @@
       <li>{{ word.word }} - {{ word.meaning }}</li>
     {% endfor %}
   </ul>
+
+  <script>
+  const searchInput = document.getElementById('search');
+  const resultsList = document.getElementById('searchResults');
+
+  searchInput.addEventListener('input', function () {
+    const query = this.value.trim();
+
+    if (query.length < 2) {
+      resultsList.innerHTML = ""; // Clear results if less than 2 letters
+      return;
+    }
+
+    fetch(`/ajax/search/?userQuery=${encodeURIComponent(query)}`)
+      .then(response => response.json())
+      .then(data => {
+        resultsList.innerHTML = ""; // Clear old results
+
+        if (data.results.length === 0) {
+          const li = document.createElement("li");
+          li.textContent = "No matches found.";
+          resultsList.appendChild(li);
+        } else {
+          data.results.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = `${item.word} - ${item.meaning}`;
+            resultsList.appendChild(li);
+          });
+        }
+      });
+  });
+</script>
 
 </body>
 </html>
